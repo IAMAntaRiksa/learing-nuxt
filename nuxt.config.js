@@ -1,4 +1,17 @@
 export default {
+
+
+
+  // Target Deployment
+  target: 'server',
+  //rendering mode SSR
+  ssr: true,
+
+  loading: {
+    color: 'white',// <-- color
+    height: '5px'// <-- height
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'learning-nuxt',
@@ -12,16 +25,30 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css",
+      },
+    ],
+    script: [
+      { src: '/js/coreui.bundle.min.js' },
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/css/style.min.css',
+    '@/assets/css/custom.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/chart.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -39,6 +66,8 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/auth
     '@nuxtjs/auth-next',
+    //https://github.com/avil13/vue-sweetalert2
+    'vue-sweetalert2/nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -58,7 +87,6 @@ export default {
         scheme: 'local',
         token: {
           property: 'token',
-          global: true,
           required: true,
           type: 'Bearer'
         },
