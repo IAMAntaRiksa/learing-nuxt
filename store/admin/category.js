@@ -34,7 +34,7 @@ export const actions = {
         });
     },
     // create data categories
-    storeCategory({ dispatch, commit }, payload) {
+    storeCategory({ dispatch }, payload) {
         return new Promise((resolve, reject) => {
             this.$axios.post(`/api/admin/categories`, payload)
                 .then(() => {
@@ -59,7 +59,7 @@ export const actions = {
         });
     },
 
-    updateCategory({ dispatch, commit }, { categoryId, payload }) {
+    updateCategory({ dispatch }, { categoryId, payload }) {
         return new Promise((resolve, reject) => {
             this.$axios.post(`/api/admin/categories/${categoryId}`, payload)
                 .then(() => {
@@ -72,7 +72,7 @@ export const actions = {
     },
 
     // delete category
-    destroyCategory({ dispatch, commit }, payload) {
+    destroyCategory({ dispatch }, payload) {
         return new Promise((resolve, reject) => {
             this.$axios.delete(`/api/admin/categories/${payload}`)
                 .then(() => {
