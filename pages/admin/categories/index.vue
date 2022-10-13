@@ -140,7 +140,7 @@ export default {
                 confirmButtonText: 'YA, HAPUS!',
                 cancelButtonText: 'TIDAK',
             }).then((result) => {
-                if (result.isConfrimed) {
+                if (result.isConfirmed) {
                     this.$store.dispatch('admin/category/destroyCategory', id)
                         .then(() => {
                             //feresh data
