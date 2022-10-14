@@ -72,7 +72,7 @@ export default {
     //meta
     head() {
         return {
-            title: 'Categories - Administrator',
+            title: 'Admin - Categories',
         }
     },
 
