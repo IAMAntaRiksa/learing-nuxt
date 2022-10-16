@@ -6,53 +6,45 @@
                     <div class="col-md-12">
                         <div class="card border-0 rounded shadow-sm border-top-orange">
                             <div class="card-header">
-                                <span class="font-weight-bold"><i class="fa fa-folder"></i> CATEGORIES</span>
+                                <span class="font-weight-bold"><i class="fa fa-users"></i> USERS</span>
                             </div>
                             <div class="card-body">
+
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <nuxt-link :to="{name : 'admin-categories-create'}"
+                                            <nuxt-link :to="{name : 'admin-users-create'}"
                                                 class="btn btn-warning btn-sm" style="padding-top: 10px;">
                                                 <i class="fa fa-plus-circle"></i> ADD NEW
                                             </nuxt-link>
                                         </div>
-                                        <input type="text" @keypress.enter="searchData" v-model="search"
-                                            class="form-control" placeholder="cari berdasarkan nama category">
+                                        <input v-model="search" @keypress.enter="searchData" type="text"
+                                            class="form-control" placeholder="cari berdasarkan nama user">
                                         <div class="input-group-append">
                                             <button @click="searchData" class="btn btn-warning"><i
-                                                    class="fa fa-search"></i>SEARCH</button>
+                                                    class="fa fa-search"></i>
+                                                SEARCH
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- table -->
-                                <b-table striped bordered hover :items="categories.data" :fields="fields" show-empty>
-                                    <!-- image -->
-                                    <template v-slot:cell(image)="data">
-                                        <img class="img-fluid" width="50" :src="data.item.image" />
+                                <b-table striped bordered hover :items="users.data" :fields="fields" show-empty>
+                                    <template v-slot:cell(image)="datas">
+                                        <img class="img-fluid" width="50" :src="datas.item.image" />
                                     </template>
-                                    <!-- end image -->
-
-                                    <!-- action -->
-                                    <template v-slot:cell(actions)="itemId">
-                                        <b-button :to="{name: 'admin-categories-edit-id', params: {id: itemId.item.id}}"
+                                    <template v-slot:cell(actionse)="row">
+                                        <b-button :to="{name: 'admin-users-edit-id', params: {id: row.item.id}}"
                                             variant="info" size="sm">
                                             EDIT
                                         </b-button>
-                                        <b-button variant="danger" size="sm" @click="destroyCategory(itemId.item.id)">
+                                        <b-button variant="danger" size="sm" @click="destroyUser(row.item.id)">
                                             DELETE</b-button>
                                     </template>
-                                    <!-- endaction -->
                                 </b-table>
-                                <!-- endtable -->
-
-
-                                <!-- pagination -->
-                                <b-pagination align="left" :value="categories.current_page"
-                                    :total-rows="categories.total" :per-page="categories.per_page" @change="changePage"
-                                    aria-controls="my-table"></b-pagination>
-                                <!-- endpagination -->
+                                <b-pagination align="left" :value="users.current_page" :total-rows="users.total"
+                                    :per-page="users.per_page" @change="changePage" aria-controls="my-table">
+                                </b-pagination>
                             </div>
                         </div>
                     </div>
@@ -61,17 +53,13 @@
         </div>
     </main>
 </template>
-
 <script>
-
 export default {
-    //layout
     layout: 'admin',
 
-    //meta
     head() {
         return {
-            title: 'Admin - Categories',
+            title: 'Admin - Users'
         }
     },
 
@@ -79,56 +67,47 @@ export default {
         return {
             fields: [
                 {
-                    label: 'Image',
-                    key: 'image',
-                    tdClass: 'text-center'
-                },
-                {
-                    label: 'Category Name',
+                    label: 'User Nama',
                     key: 'name'
                 },
                 {
-                    label: 'Actions',
-                    key: 'actions',
-                    tdClass: 'text-center'
+                    lebel: 'Email Addres',
+                    key: 'email'
                 },
+
                 {
                     label: 'Actions',
-                    key: 'actions',
+                    key: 'actionse',
                     tdClass: 'text-center'
+
                 }
             ],
-
             search: ''
         }
     },
 
+
     async asyncData({ store }) {
-        await store.dispatch('admin/category/getCategoriesData')
+        await store.dispatch('admin/user/getUsersData')
     },
 
     computed: {
-        //categories
-        categories() {
-            return this.$store.state.admin.category.categories
-        },
+        users() {
+            return this.$store.state.admin.user.users
+        }
     },
 
     methods: {
         searchData() {
-            this.$store.commit('admin/category/SET_PAGE', 1)
-            //dispatch on action "getCategoriesData"
-            this.$store.dispatch('admin/category/getCategoriesData', this.search)
+            this.$store.commit('admin/user/SET_PAGE', 1)
+            this.$store.dispatch('admin/user/getUsersData', this.search)
         },
-
         changePage(page) {
-            this.$store.commit('admin/category/SET_PAGE', page)
-            //dispatch on action "getCategoriesData"
-            this.$store.dispatch('admin/category/getCategoriesData', this.search)
+            this.$store.commit('admin/user/SET_PAGE', page)
+            this.$store.dispatch('admin/user/getUsersData', this.search)
         },
 
-
-        destroyCategory(id) {
+        destroyUser(id) {
             this.$swal.fire({
                 title: 'APAKAH ANDA YAKIN ?',
                 text: "INGIN MENGHAPUS DATA INI !",
@@ -140,7 +119,7 @@ export default {
                 cancelButtonText: 'TIDAK',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.$store.dispatch('admin/category/destroyCategory', id)
+                    this.$store.dispatch('admin/user/destroyUser', id)
                         .then(() => {
                             //feresh data
                             this.$nuxt.refresh()
