@@ -1,10 +1,10 @@
-# API : LARAVEL
+# API : LARAVEL NUXT-SSR
 # ADMIN
   <img src="https://user-images.githubusercontent.com/32923555/196024597-60cce7a1-3f49-4f6d-8f15-d3a92881ba0a.png" width="1000" height="500"/>
 
-# ADMIN
+# FRONTEND
 
-  <img src="https://user-images.githubusercontent.com/32923555/196024597-60cce7a1-3f49-4f6d-8f15-d3a92881ba0a.png" width="1000" height="500"/>
+  <img src="https://user-images.githubusercontent.com/32923555/197381877-9c10bcc4-eb6b-4b94-8c87-2f95fdfdebf9.png" width="1000" height="500"/>
 
 ## Build Setup
 
