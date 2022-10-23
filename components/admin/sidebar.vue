@@ -1,6 +1,5 @@
 <template>
     <ul class="c-sidebar-nav">
-
         <li class="c-sidebar-nav-item">
             <nuxt-link :to="{name: 'admin-dashboard'}" class="c-sidebar-nav-link">
                 <svg class="c-sidebar-nav-icon">

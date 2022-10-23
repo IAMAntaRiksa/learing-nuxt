@@ -46,7 +46,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/chart.js', mode: 'client' },
-    { src: '~/plugins/mixins.js' }
+    { src: '~/plugins/mixins.js' },
+    { src: '~/plugins/vue-star-rating.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -96,6 +97,23 @@ export default {
           login: { url: '/api/admin/login', method: 'post' },
           logout: { url: '/api/admin/logout', method: 'post' },
           user: { url: '/api/admin/user', method: 'get' }
+        }
+      },
+      customer: {
+        scheme: 'local',
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer'
+        },
+        user: {
+          property: 'user',
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/api/customer/login', method: 'post' },
+          logout: { url: '/api/customer/logout', method: 'post' },
+          user: { url: '/api/customer/user', method: 'get' }
         }
       }
     }

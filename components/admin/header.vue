@@ -77,7 +77,6 @@ export default {
             return this.$auth.user
         }
     },
-
     methods: {
         //method "logout"
         async logout() {
@@ -87,9 +86,7 @@ export default {
                 name: 'admin-login'
             })
         }
-
     }
-
 }
 </script>
   
