@@ -34,6 +34,9 @@ export default {
     ],
     script: [
       { src: '/js/coreui.bundle.min.js' },
+      {
+        src: 'https://app.sandbox.midtrans.com/snap/snap.js', 'data-client-key': 'SB-Mid-client-6CCXmRnLb1Pspo-9'
+      },
     ]
   },
 

@@ -162,26 +162,24 @@ export default {
                 })
             }
 
-            //dispatch to action "storeCart" vuex
+            // //dispatch to action "storeCart" vuex
             await this.$store.dispatch('web/cart/storeCart', {
                 product_id: productId,
                 price: price,
                 qty: 1,
                 weight: weight
-            })
-                //success add to cart
-                .then(() => {
+            }).then(() => {
 
-                    //sweet alert
-                    this.$swal.fire({
-                        title: 'BERHASIL!',
-                        text: "Product Berhasil Ditambahkan di Keranjang!",
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-
+                //sweet alert
+                this.$swal.fire({
+                    title: 'BERHASIL!',
+                    text: "Product Berhasil Ditambahkan di Keranjang!",
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
                 })
+
+            })
 
         }
 

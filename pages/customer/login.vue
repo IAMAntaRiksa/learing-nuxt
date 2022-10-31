@@ -90,6 +90,9 @@ export default {
             await this.$auth.loginWith('customer', {
                 data: this.user
             }).then(() => {
+
+                this.$store.dispatch('web/cart/getCartsData');
+                this.$store.dispatch('web/cart/getCartWeight');
                 //redirect
                 this.$router.push({
                     name: 'customer-dashboard'
