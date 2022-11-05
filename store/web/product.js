@@ -23,7 +23,7 @@ export const actions = {
         return new Promise((resolve, reject) => {
             this.$axios.get(`/api/web/products?q=${search}&page=${state.page}`)
                 .then((response) => {
-                    commit('SET_PRODUCTS_DATA', response.data.data)
+                    commit('SET_PRODUCTS_DATA', response.data)
                     resolve()
                 }).catch((err) => {
                     reject(err)
@@ -32,12 +32,10 @@ export const actions = {
     },
     getDetailProduct({ commit }, payload) {
         return new Promise((resolve, reject) => {
-            //get to Rest API "/api/web/products/:slug" with method "GET"
             this.$axios.get(`/api/web/products/${payload}`)
                 .then(response => {
                     //commit to mutation "SET_PRODUCT_DATA"
-                    commit('SET_PRODUCT_DATA', response.data.data)
-
+                    commit('SET_PRODUCT_DATA', response.data)
                     //resolve promise
                     resolve()
 

@@ -11,13 +11,13 @@
                             </div>
                             <div class="card-body">
                                 <form @submit.prevent="updateCategory">
-
                                     <div class="form-group">
                                         <label>GAMBAR</label>
                                         <input @change="handelFileChange" type="file" class="form-control">
                                         <div v-if="validation.image" class="mt-2">
                                             <b-alert show variant="danger">{{ validation.image[0] }}</b-alert>
                                         </div>
+
                                     </div>
 
                                     <div class="form-group">
@@ -117,8 +117,8 @@ export default {
                         name: "admin-categories",
                     });
                 }).catch((error) => {
-                    //assign error to state "validation"
-                    this.validation = error.response.data;
+                    console.log(error)
+                    this.validation = error;
                 });
         },
     },

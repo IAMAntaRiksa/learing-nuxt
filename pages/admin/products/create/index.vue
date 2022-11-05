@@ -215,7 +215,7 @@ export default {
 
                 })
                 .catch(error => {
-                    this.validation = error.response.data
+                    this.validation = error
                 })
         }
     },

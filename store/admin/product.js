@@ -24,10 +24,10 @@ export const actions = {
         return new Promise((resolve, reject) => {
             this.$axios.get(`api/admin/products?q=${search}&page=${state.page}`)
                 .then((response) => {
-                    commit('SET_PRODUCTS_DATA', response.data.data)
+                    commit('SET_PRODUCTS_DATA', response.data)
                     resolve()
                 }).catch((err) => {
-                    reject(err)
+                    reject(err.response.data.errors)
                 });
         });
     },
@@ -38,7 +38,7 @@ export const actions = {
                     dispatch('getProductsData')
                     resolve()
                 }).catch((err) => {
-                    reject(err)
+                    reject(err.response.data.errors)
                 });
         });
     },
@@ -47,10 +47,10 @@ export const actions = {
         return new Promise((resolve, reject) => {
             this.$axios.get(`/api/admin/products/${payload}`)
                 .then((response) => {
-                    commit('SET_PRODUCT_DATA', response.data.data)
+                    commit('SET_PRODUCT_DATA', response.data)
                     resolve()
                 }).catch((err) => {
-                    reject(err)
+                    reject(err.response.data.errors)
                 });
         });
     },
@@ -62,7 +62,7 @@ export const actions = {
                     dispatch('getProductsData')
                     resolve()
                 }).catch((err) => {
-                    reject(err)
+                    reject(err.response.data.errors)
                 });
         });
     },

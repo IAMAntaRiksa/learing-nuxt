@@ -12,11 +12,13 @@ export const mutations = {
 export const actions = {
     getListAllCategories({ commit }, payload) {
         return new Promise((resolve, reject) => {
-            this.$axios.get('/api/web/categories')
+            this.$axios.get('/api/web/categories', payload)
                 .then((response) => {
                     commit('SET_CATEGORIES_DATA', response.data.data)
                     resolve()
-                })
+                }).catch((err) => {
+                    reject(err.response.data.errors)
+                });
         })
     },
 }

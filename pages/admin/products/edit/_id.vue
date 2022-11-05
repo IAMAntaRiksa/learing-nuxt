@@ -188,21 +188,14 @@ export default {
         }
     },
     methods: {
-        //handle file upload
         handleFileChange(e) {
-
-            //get image
             let image = this.product.image = e.target.files[0]
 
-            //check fileType
-            if (!image.type.match('image.*')) {
-
+            if (!image.type.match('image,*')) {
                 //if fileType not allowed, then clear value and set null
                 e.target.value = ''
-
                 //set state "product.image" to null
                 this.product.image = null
-
                 //show sweet alert
                 this.$swal.fire({
                     title: 'OOPS!',
@@ -217,7 +210,6 @@ export default {
 
         //method "updateProduct"
         async updateProduct() {
-
             //define formData
             let formData = new FormData();
 
@@ -229,38 +221,28 @@ export default {
             formData.append('price', this.product.price)
             formData.append('stock', this.product.stock)
             formData.append('discount', this.product.discount)
-            formData.append("_method", "PATCH")
+            formData.append("_method", "PUT")
 
             //sending data to action "updateProduct" vuex
             await this.$store.dispatch('admin/product/updateProduct', {
                 productId: this.$route.params.id,
                 payload: formData
+            }).then(() => {
+                //sweet alert
+                this.$swal.fire({
+                    title: 'BERHASIL!',
+                    text: "Data Berhasil Diupdate!",
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                //redirect route "admin-products"
+                this.$router.push({
+                    name: 'admin-products'
+                })
+            }).catch(error => {
+                this.validation = error
             })
-
-                //success
-                .then(() => {
-
-                    //sweet alert
-                    this.$swal.fire({
-                        title: 'BERHASIL!',
-                        text: "Data Berhasil Diupdate!",
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-
-                    //redirect route "admin-products"
-                    this.$router.push({
-                        name: 'admin-products'
-                    })
-
-                })
-
-                //error
-                .catch(error => {
-                    //assign error to state "validation"
-                    this.validation = error.response.data
-                })
         }
     }
 

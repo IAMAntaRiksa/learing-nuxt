@@ -13,7 +13,7 @@
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <nuxt-link :to="{name : 'admin-products-create'}"
+                                            <nuxt-link :to="{ name: 'admin-products-create' }"
                                                 class="btn btn-warning btn-sm" style="padding-top: 10px;">
                                                 <i class="fa fa-plus-circle"></i> ADD NEW
                                             </nuxt-link>
@@ -31,7 +31,7 @@
 
                                 <b-table striped bordered :items="products.data" :fields="fields" hover show-empty>
                                     <template v-slot:cell(actions)="row">
-                                        <b-button :to="{name: 'admin-products-edit-id', params: {id: row.item.id}}"
+                                        <b-button :to="{ name: 'admin-products-edit-id', params: { id: row.item.id } }"
                                             variant="info" size="sm">
                                             EDIT
                                         </b-button>
@@ -40,8 +40,9 @@
                                     </template>
                                 </b-table>
                                 <!-- pagination -->
-                                <b-pagination align="left" :value="products.current_page" :total-rows="products.total"
-                                    :per-page="products.per_page" @change="changePage" aria-controls="my-table">
+                                <b-pagination align="left" :value="products.meta.current_page"
+                                    :total-rows="products.meta.total" :per-page="products.meta.per_page"
+                                    @change="changePage" aria-controls="my-table">
                                 </b-pagination>
                             </div>
                         </div>

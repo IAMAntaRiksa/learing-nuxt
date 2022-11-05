@@ -12,7 +12,7 @@
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <nuxt-link :to="{name : 'admin-categories-create'}"
+                                            <nuxt-link :to="{ name: 'admin-categories-create' }"
                                                 class="btn btn-warning btn-sm" style="padding-top: 10px;">
                                                 <i class="fa fa-plus-circle"></i> ADD NEW
                                             </nuxt-link>
@@ -35,12 +35,14 @@
                                     <!-- end image -->
 
                                     <!-- action -->
-                                    <template v-slot:cell(actions)="itemId">
-                                        <b-button :to="{name: 'admin-categories-edit-id', params: {id: itemId.item.id}}"
+                                    <template v-slot:cell(actions)="data">
+                                        <b-button
+                                            :to="{ name: 'admin-categories-edit-id', params: { id: data.item.id } }"
                                             variant="info" size="sm">
                                             EDIT
                                         </b-button>
-                                        <b-button variant="danger" size="sm" @click="destroyCategory(itemId.item.id)">
+
+                                        <b-button variant="danger" size="sm" @click="destroyCategory(data.item.id)">
                                             DELETE</b-button>
                                     </template>
                                     <!-- endaction -->
@@ -49,9 +51,10 @@
 
 
                                 <!-- pagination -->
-                                <b-pagination align="left" :value="categories.current_page"
-                                    :total-rows="categories.total" :per-page="categories.per_page" @change="changePage"
-                                    aria-controls="my-table"></b-pagination>
+                                <b-pagination align="right" :value="categories.meta.current_page"
+                                    :total-rows="categories.meta.total" :per-page="categories.meta.per_page"
+                                    @change="changePage" aria-controls="my-table">
+                                </b-pagination>
                                 <!-- endpagination -->
                             </div>
                         </div>
@@ -112,6 +115,7 @@ export default {
         categories() {
             return this.$store.state.admin.category.categories
         },
+
     },
 
     methods: {
@@ -126,7 +130,6 @@ export default {
             //dispatch on action "getCategoriesData"
             this.$store.dispatch('admin/category/getCategoriesData', this.search)
         },
-
 
         destroyCategory(id) {
             this.$swal.fire({

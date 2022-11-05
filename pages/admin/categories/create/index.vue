@@ -111,7 +111,8 @@ export default {
                         name: 'admin-categories'
                     })
                 }).catch((erorr) => {
-                    this.validation = erorr.response.data
+                    console.log(erorr)
+                    this.validation = erorr
                 });
         }
     }

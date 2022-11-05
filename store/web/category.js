@@ -33,7 +33,7 @@ export const actions = {
         return new Promise((resolve, reject) => {
             this.$axios.get(`/api/web/categoryHeader`, payload)
                 .then((response) => {
-                    commit('SET_CATEGORYHEADER_DATA', response.data.data)
+                    commit('SET_CATEGORYHEADER_DATA', response.data)
                     resolve()
                 }).catch((error) => {
                     reject(error)
@@ -45,7 +45,7 @@ export const actions = {
             //get to Rest API "/api/web/categories/:slug" with method "GET"
             this.$axios.get(`/api/web/categories/${payload}`)
                 .then((response) => {
-                    commit('SET_CATEGORY_DATA', response.data.data)
+                    commit('SET_CATEGORY_DATA', response.data)
                     resolve()
                 }).catch((err) => {
                     reject(err)
